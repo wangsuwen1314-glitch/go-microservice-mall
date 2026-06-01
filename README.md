@@ -6,4 +6,4 @@
 ![Redis](https://img.shields.io/badge/Redis-7.0-DC382D?style=flat&logo=redis)
 ![Docker](https://img.shields.io/badge/Docker-✔-2496ED?style=flat&logo=docker)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat)
-基于一个go语言微服务后端商城开发系统
+>基于一个go语言微服务后端商城开发系统
