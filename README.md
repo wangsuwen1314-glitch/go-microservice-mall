@@ -39,7 +39,49 @@
 - **Redis 缓存**：缓存 Session 登录态及商品热点数据，采用 Cache-Aside 模式，防止缓存穿透
 - **gRPC 通信**：服务间使用 gRPC + Protobuf 强类型契约，高效且文档化
 - **容器化部署**：提供 Dockerfile 与 docker-compose，一键启动所有服务
-### 🧩 系统架构 
+## 🧩 系统架构 
 <img width="1268" height="1295" alt="micro_framework01" src="https://github.com/user-attachments/assets/bc7f5aa3-2b51-4f46-a110-672a29fc6983" />
 <img width="1218" height="1295" alt="micro_framework02" src="https://github.com/user-attachments/assets/e81b313f-762e-48be-817d-32d78831b457" />
-
+##项目目录结构
+```bash
+xiaomishop/
+├── client/                        # 面向前端的网关/业务服务（Gin）
+│   ├── ginWebApi/                 # 用户端 API 网关（商城核心业务）
+│   │   ├── controllers/           # 控制器层
+│   │   ├── middlewares/           # 中间件（鉴权、跨域等）
+│   │   ├── models/                # 数据模型
+│   │   ├── proto/                 # gRPC 客户端桩代码（调用微服务）
+│   │   ├── routers/               # 路由注册
+│   │   ├── static/                # 静态资源
+│   │   ├── templates/             # HTML 模板
+│   │   └── main.go                # 入口
+│   └── ginshop/                   # 后台管理服务（可能含管理端页面）
+│       ├── conf/                  # 配置
+│       ├── controllers/
+│       ├── middlewares/
+│       ├── models/
+│       ├── proto/                 # gRPC 客户端桩代码
+│       ├── rabbitmq/              # RabbitMQ 消息队列
+│       ├── routers/
+│       ├── static/
+│       ├── templates/
+│       └── main.go
+├── server/                        # 独立微服务（gRPC 服务端）
+│   ├── captcha/                   # 验证码服务
+│   │   ├── handler/               # gRPC 接口实现
+│   │   ├── proto/                 # Protobuf 定义及生成代码
+│   │   ├── main.go
+│   │   ├── Dockerfile
+│   │   └── Makefile
+│   └── rbac/                      # 权限管理服务
+│       ├── conf/                  # 配置
+│       ├── handler/               # gRPC 接口实现
+│       ├── models/                # 数据模型
+│       ├── proto/
+│       ├── main.go
+│       ├── Dockerfile
+│       └── Makefile
+├── docker-compose.yml             # 容器编排（可补充）
+├── Makefile                       # 顶层构建命令（可补充）
+└── README.md
+```
